@@ -9,9 +9,9 @@
   --accent: #7fc8c2;
   --on-main: #ffffff;
 }
-body.bw    { --main: #1747a6; --accent: #f2c230; }
-body.heros { --main: #e2521d; --accent: #ffd23f; }
-body.jrera { --main: #1f6f8b; --accent: #7fc8c2; }
+body.bw    { --main: #c0633a; --accent: #e9b89c; } /* 今のサイトのテラコッタ */
+body.heros { --main: #1d1d1f; --accent: #9aa0a6; } /* 今のサイトの黒と白 */
+body.jrera { --main: #e8700f; --accent: #f6b21a; } /* ロゴのオレンジと黄 */
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -54,8 +54,10 @@ nav.menu a:hover { color: var(--main); }
 
 .btn {
   display: inline-block; padding: 12px 24px; border-radius: 999px; font-weight: 700;
-  text-decoration: none; background: var(--accent); color: var(--ink); border: 0; cursor: pointer; font-size: 15px;
+  text-decoration: none; background: var(--main); color: #fff; border: 0; cursor: pointer; font-size: 15px;
 }
+.hero .btn { background: #fff; color: var(--ink); }
+.hero .btn.ghost { background: transparent; color: #fff; }
 .btn.ghost { background: transparent; color: inherit; border: 2px solid currentColor; }
 .btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
 
