@@ -1,0 +1,106 @@
+/* 3 サイト共通。色だけ body のクラスで変える */
+:root {
+  --ink: #1b2430;
+  --sub: #5b6675;
+  --line: #e3e7ec;
+  --bg: #ffffff;
+  --soft: #f5f7f9;
+  --main: #1f6f8b;
+  --accent: #7fc8c2;
+  --on-main: #ffffff;
+}
+body.bw    { --main: #1747a6; --accent: #f2c230; }
+body.heros { --main: #e2521d; --accent: #ffd23f; }
+body.jrera { --main: #1f6f8b; --accent: #7fc8c2; }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; color: var(--ink); background: var(--bg);
+  font: 16px/1.8 "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif;
+}
+img { max-width: 100%; }
+a { color: var(--main); }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+
+.mock-note {
+  background: #222; color: #fff; font-size: 12px; text-align: center; padding: 4px 16px;
+}
+.mock-note a { color: #9fd; }
+
+header.site {
+  position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.95);
+  border-bottom: 1px solid var(--line); backdrop-filter: blur(6px);
+}
+header.site .wrap { display: flex; align-items: center; gap: 16px; min-height: 60px; flex-wrap: wrap; }
+.logo { font-weight: 800; font-size: 18px; color: var(--ink); text-decoration: none; letter-spacing: .02em; }
+.logo small { display: block; font-size: 11px; font-weight: 500; color: var(--sub); line-height: 1.2; }
+nav.menu { margin-left: auto; display: flex; gap: 4px 18px; flex-wrap: wrap; font-size: 14px; }
+nav.menu a { color: var(--ink); text-decoration: none; }
+nav.menu a:hover { color: var(--main); }
+
+.hero {
+  background: linear-gradient(135deg, var(--main), color-mix(in srgb, var(--main) 60%, #000));
+  color: var(--on-main); padding: 72px 0 64px; position: relative; overflow: hidden;
+}
+.hero::after { /* 走るイメージの斜線 */
+  content: ""; position: absolute; inset: 0; opacity: .12;
+  background: repeating-linear-gradient(115deg, transparent 0 40px, #fff 40px 44px);
+}
+.hero .wrap { position: relative; z-index: 1; }
+.hero .eyebrow { font-size: 13px; letter-spacing: .15em; opacity: .85; }
+.hero h1 { font-size: clamp(28px, 6vw, 48px); line-height: 1.3; margin: 8px 0 16px; }
+.hero p { max-width: 36em; opacity: .95; }
+
+.btn {
+  display: inline-block; padding: 12px 24px; border-radius: 999px; font-weight: 700;
+  text-decoration: none; background: var(--accent); color: var(--ink); border: 0; cursor: pointer; font-size: 15px;
+}
+.btn.ghost { background: transparent; color: inherit; border: 2px solid currentColor; }
+.btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+
+section { padding: 56px 0; }
+section.alt { background: var(--soft); }
+h2 { font-size: clamp(22px, 4vw, 30px); margin: 0 0 8px; }
+h2 + .lead { color: var(--sub); margin-top: 0; margin-bottom: 28px; }
+h3 { margin: 0 0 6px; font-size: 18px; }
+
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+.card .tag { display: inline-block; font-size: 12px; font-weight: 700; color: var(--main); margin-bottom: 4px; }
+.card p { margin: 0; color: var(--sub); font-size: 15px; }
+
+table.price { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; }
+table.price th, table.price td { padding: 12px 14px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+table.price td:last-child { text-align: right; white-space: nowrap; font-weight: 700; }
+table.price small { color: var(--sub); font-weight: 400; }
+
+.schedule { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.schedule li { display: flex; gap: 14px; align-items: center; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; }
+.schedule .date { font-weight: 800; color: var(--main); min-width: 5.5em; }
+.schedule .place { color: var(--sub); font-size: 14px; }
+
+.callout {
+  border-left: 5px solid var(--accent); background: #fff; padding: 16px 20px; border-radius: 0 12px 12px 0; margin-top: 24px;
+}
+
+.profile { display: grid; gap: 24px; grid-template-columns: 160px 1fr; align-items: start; }
+.avatar { width: 160px; aspect-ratio: 1; border-radius: 50%; background: var(--soft); border: 1px dashed var(--line);
+  display: grid; place-items: center; color: var(--sub); font-size: 13px; }
+.profile ul { padding-left: 1.2em; margin: 8px 0; }
+@media (max-width: 600px) { .profile { grid-template-columns: 1fr; } }
+
+form.contact { display: grid; gap: 12px; max-width: 560px; }
+form.contact label { font-size: 14px; font-weight: 700; }
+form.contact input, form.contact select, form.contact textarea {
+  width: 100%; font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: #fff;
+}
+
+/* 共通フッター: 3 ブランドを行き来できる */
+footer.family { background: #10161e; color: #cfd6de; padding: 40px 0 24px; font-size: 14px; }
+footer.family .brands { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 24px; }
+footer.family .brands a { color: #fff; text-decoration: none; border: 1px solid #2a3542; border-radius: 12px; padding: 14px 16px; display: block; }
+footer.family .brands a:hover { border-color: #fff; }
+footer.family .brands small { display: block; color: #8b97a5; }
+footer.family .copy { color: #8b97a5; font-size: 12px; }
+table.price.info td { white-space: normal; text-align: left; font-weight: 500; }
