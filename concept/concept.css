@@ -224,3 +224,21 @@ footer .copy { margin-left: auto; }
 @media (max-width: 760px) { .wants { grid-template-columns: 1fr; } .wants div { padding: 18px 0; border-bottom: 1px solid var(--line); } }
 .video { aspect-ratio: 16 / 9; border-radius: 20px; margin-top: 40px; background: var(--heros); color: #aab; display: grid; place-items: center; font-size: 14px; }
 .hero.solo h1 { text-shadow: none; }
+
+/* ── J-RERA のトップはオレンジ（ロゴの色） ── */
+body.orange { --track: #e8700f; --track-deep: #9a3f0a; --sky: #fff3e8; --line: #f0d8c3; --sub: #6b5646; }
+body.orange .top { background: rgba(255,243,232,.92); }
+body.orange .hero { color: var(--ink); }
+body.orange .hero h1 { text-shadow: none; }
+body.orange .hero p { color: var(--ink); }
+body.orange .hero .lanes i { color: rgba(255,255,255,.7); }
+body.orange .hero .start { background: rgba(255,255,255,.8); }
+body.orange .hero .gust { background: linear-gradient(90deg, transparent, #fff); }
+body.orange .hero .cta { background: var(--ink); color: #fff; }
+body.orange .hero .cta:hover { background: #24345c; }
+body.orange .hero .cta.line { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); }
+body.orange .hero .cta.line:hover { background: rgba(20,33,61,.08); }
+body.orange .method .intro, body.orange .method .facts div, body.orange .lab .scale, body.orange .lab .note { color: #ffd9bd; }
+body.orange .method blockquote, body.orange .lab .verdict span { color: #fff1e4; }
+body.orange .lab { background: #7a3108; }
+body.orange .chips label:hover { border-color: var(--wind); }
