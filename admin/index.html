@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>支払い管理｜J-RERA</title>
+<link rel="stylesheet" href="../base.css">
+<style>
+  body { background: var(--soft); }
+  main { padding: 24px 0 48px; }
+  .kpis { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); margin-bottom: 20px; }
+  .kpi { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+  .kpi small { color: var(--sub); font-size: 13px; }
+  .kpi b { display: block; font-size: 24px; line-height: 1.3; }
+  .kpi.warn b { color: #c62828; }
+  .tabs { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+  .tabs button { font: inherit; font-size: 14px; border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 6px 16px; cursor: pointer; }
+  .tabs button[aria-selected="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .panel { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+  .tools { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .tools input, .tools select { font: inherit; font-size: 14px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; }
+  .scroll { overflow-x: auto; }
+  table.m { border-collapse: collapse; width: 100%; font-size: 14px; }
+  table.m th, table.m td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
+  table.m thead th { color: var(--sub); font-weight: 500; font-size: 12px; }
+  table.m td.c { text-align: center; }
+  .paid { color: #2e7d32; font-weight: 700; }
+  .due { color: #c62828; font-weight: 700; }
+  .na { color: #c3c9d0; }
+  .pill { font-size: 11px; padding: 1px 8px; border-radius: 999px; color: #fff; }
+  .pill.bw { background: #c0633a; } .pill.heros { background: #1d1d1f; }
+  .bars { display: grid; gap: 8px; }
+  .bar { display: grid; grid-template-columns: 3.5em 1fr 6.5em; gap: 10px; align-items: center; font-size: 14px; }
+  .bar .track { display: flex; height: 18px; border-radius: 6px; overflow: hidden; background: var(--soft); }
+  .bar .track span { display: block; }
+  .bar .v { text-align: right; font-weight: 700; }
+  .legend { font-size: 13px; color: var(--sub); margin-top: 10px; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin: 0 4px 0 12px; }
+  .btn.sm { padding: 6px 14px; font-size: 13px; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body class="jrera">
+<div class="mock-note">見本です（名前・金額はすべて架空）。本番は Square のデータを取り込みます｜<a href="../proposal.html">提案ページへ戻る</a></div>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="#">支払い管理<small>J-RERA ／ BW ／ HERO'S</small></a>
+  <nav class="menu"><span style="color:var(--sub)">最終取り込み: 今日 9:00（Square）</span></nav>
+</div></header>
+
+<main><div class="wrap">
+  <div class="kpis" id="kpis"></div>
+
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-tab="members">会員と支払い</button>
+    <button role="tab" aria-selected="false" data-tab="due">未払い</button>
+    <button role="tab" aria-selected="false" data-tab="sales">売上</button>
+    <button role="tab" aria-selected="false" data-tab="lessons">パーソナル予約</button>
+  </div>
+
+  <section class="panel" id="members">
+    <div class="tools">
+      <input id="q" placeholder="名前で探す" aria-label="名前で探す">
+      <select id="cat" aria-label="区分"><option value="">すべての区分</option></select>
+    </div>
+    <div class="scroll"><table class="m" id="matrix"></table></div>
+    <p class="legend"><span class="paid">✓</span> 支払い済み　<span class="due">未</span> 未払い　<span class="na">—</span> 対象外　　HERO'S 欄はクラブ会員が今年受けたパーソナルの回数</p>
+  </section>
+
+  <section class="panel" id="due" hidden>
+    <div class="scroll"><table class="m" id="dueTable"></table></div>
+    <div class="btns"><button class="btn sm" id="remindAll">未払いの人にまとめて請求書を送り直す</button></div>
+  </section>
+
+  <section class="panel" id="sales" hidden>
+    <div class="bars" id="bars"></div>
+    <p class="legend"><i style="background:#c0633a"></i>BW陸上クラブ <i style="background:#1d1d1f"></i>HERO'S</p>
+  </section>
+
+  <section class="panel" id="lessons" hidden>
+    <div class="scroll"><table class="m" id="lessonTable"></table></div>
+  </section>
+</div></main>
+
+<script>
+// 架空のデータ。本番は Square の顧客・請求書・予約から作る
+const FEES = [
+  { key: 'annual', name: '年会費', yen: 10000 },
+  { key: 'ins', name: '保険', yen: 1450 },
+  { key: 'jaaf', name: '陸連登録', yen: 0 },   // 区分で変わる（下の JAAF）
+  { key: 'uni', name: 'ユニフォーム', yen: 16000 },
+  { key: 'entry', name: '大会費（10月）', yen: 1000 },
+];
+const JAAF = { 小学生: 1000, 中学生: 1500, 高校生: 2000, 一般: 3500 }; // 仮
+// 1 = 済, 0 = 未, null = 対象外
+const MEMBERS = [
+  ['会員A', '小学生', [1, 1, 1, 1, 1], 3],
+  ['会員B', '小学生', [1, 1, 1, 1, 0], 0],
+  ['会員C', '小学生', [0, 0, 1, null, null], 1],
+  ['会員D', '中学生', [1, 1, 1, 1, 1], 5],
+  ['会員E', '中学生', [1, 1, 0, 1, 1], 0],
+  ['会員F', '高校生', [1, 1, 1, null, 1], 2],
+  ['会員G', '高校生', [0, 1, 1, 1, 0], 0],
+  ['会員H', '一般', [1, 1, 1, 1, null], 0],
+  ['会員I', '一般', [1, 1, 1, null, 1], 4],
+  ['会員J', '一般', [0, 0, 0, 0, null], 0],
+].map(([name, cat, st, lessons]) => ({ name, cat, st, lessons }));
+const SALES = [ // 月, BW, HERO'S
+  ['5月', 38000, 52000], ['6月', 12000, 61000], ['7月', 9000, 88000],
+  ['8月', 6000, 74000], ['9月', 21000, 95000], ['10月', 15000, 43000],
+];
+const LESSONS = [
+  ['10/2（木）17:00', '会員D', true, 4400], ['10/4（土）10:00', '田中さん（一般）', false, 5500],
+  ['10/4（土）11:00', '会員A', true, 4400], ['10/9（木）17:00', '佐藤さん（一般）', false, 5500],
+  ['10/11（土）10:00', '会員I', true, 4400],
+];
+
+const yen = n => n.toLocaleString('ja-JP') + '円';
+const feeYen = (m, i) => FEES[i].key === 'jaaf' ? JAAF[m.cat] : FEES[i].yen;
+const dues = MEMBERS.flatMap(m => m.st.map((s, i) => s === 0 ? { m, i, yen: feeYen(m, i) } : null).filter(Boolean));
+
+// 上の数字
+const month = SALES[SALES.length - 1];
+document.getElementById('kpis').innerHTML = [
+  ['今月の売上（BW）', yen(month[1])],
+  ["今月の売上（HERO'S）", yen(month[2])],
+  ['未払い', `${dues.length}件 / ${yen(dues.reduce((a, d) => a + d.yen, 0))}`, 'warn'],
+  ['クラブ会員', `${MEMBERS.length}人`],
+].map(([l, v, c]) => `<div class="kpi ${c || ''}"><small>${l}</small><b>${v}</b></div>`).join('');
+
+// 会員 × 支払い
+const cat = document.getElementById('cat');
+cat.innerHTML += Object.keys(JAAF).map(c => `<option>${c}</option>`).join('');
+function drawMatrix() {
+  const q = document.getElementById('q').value.trim(), c = cat.value;
+  const rows = MEMBERS.filter(m => (!q || m.name.includes(q)) && (!c || m.cat === c));
+  document.getElementById('matrix').innerHTML =
+    `<thead><tr><th>名前</th><th>区分</th>${FEES.map(f => `<th>${f.name}</th>`).join('')}<th>HERO'S</th></tr></thead><tbody>` +
+    rows.map(m => `<tr><td>${m.name}</td><td>${m.cat}</td>${m.st.map(s =>
+      `<td class="c">${s === 1 ? '<span class="paid">✓</span>' : s === 0 ? '<span class="due">未</span>' : '<span class="na">—</span>'}</td>`).join('')}
+      <td class="c">${m.lessons ? m.lessons + '回' : '<span class="na">0</span>'}</td></tr>`).join('') + '</tbody>';
+}
+document.getElementById('q').oninput = drawMatrix; cat.onchange = drawMatrix; drawMatrix();
+
+// 未払い
+document.getElementById('dueTable').innerHTML =
+  '<thead><tr><th>名前</th><th>項目</th><th>金額</th><th></th></tr></thead><tbody>' +
+  dues.map(d => `<tr><td>${d.m.name}</td><td>${FEES[d.i].name}</td><td>${yen(d.yen)}</td>
+    <td><button class="btn sm ghost remind">請求書を送る</button></td></tr>`).join('') + '</tbody>';
+const demo = () => alert('見本なので送信はしません。本番では Square から請求書（カード払いのリンク付き）がメールで届きます。');
+document.querySelectorAll('.remind').forEach(b => b.onclick = demo);
+document.getElementById('remindAll').onclick = demo;
+
+// 売上（ブランド別の積み上げ）
+const max = Math.max(...SALES.map(([, a, b]) => a + b));
+document.getElementById('bars').innerHTML = SALES.map(([m, a, b]) =>
+  `<div class="bar"><span>${m}</span><span class="track">
+    <span style="width:${a / max * 100}%;background:#c0633a" title="BW ${yen(a)}"></span>
+    <span style="width:${b / max * 100}%;background:#1d1d1f" title="HERO'S ${yen(b)}"></span>
+  </span><span class="v">${yen(a + b)}</span></div>`).join('');
+
+// パーソナル予約（Square 予約から）
+document.getElementById('lessonTable').innerHTML =
+  '<thead><tr><th>日時</th><th>お客さん</th><th>クラブ会員</th><th>金額</th><th>支払い</th></tr></thead><tbody>' +
+  LESSONS.map(([t, who, mem, y]) => `<tr><td>${t}</td><td>${who}</td>
+    <td>${mem ? '<span class="pill bw">BW会員・特別価格</span>' : ''}</td><td>${yen(y)}</td><td class="paid">カード済</td></tr>`).join('') + '</tbody>';
+
+// タブ
+document.querySelectorAll('[role=tab]').forEach(t => t.onclick = () => {
+  document.querySelectorAll('[role=tab]').forEach(x => x.setAttribute('aria-selected', x === t));
+  document.querySelectorAll('.panel').forEach(p => p.hidden = p.id !== t.dataset.tab);
+});
+</script>
+</body>
+</html>
