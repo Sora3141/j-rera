@@ -4,111 +4,168 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>サイトまとめの提案</title>
+<title>ホームページと支払いのまとめ｜ご提案</title>
 <link rel="stylesheet" href="base.css">
 <style>
-  .flow { display: grid; gap: 12px; grid-template-columns: 1fr auto 1fr; align-items: center; }
-  .flow .arrow { font-size: 28px; color: var(--sub); text-align: center; }
-  .box { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+  .flow { display: grid; gap: 12px; grid-template-columns: 1fr auto 1fr; align-items: stretch; }
+  .flow .arrow { font-size: 28px; color: var(--sub); align-self: center; text-align: center; }
+  .box { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
   .box h3 { font-size: 15px; color: var(--sub); }
   .box ul { margin: 0; padding-left: 1.2em; }
-  .box code { font-size: 14px; background: var(--soft); padding: 1px 6px; border-radius: 6px; }
-  .tree { font-family: ui-monospace, Menlo, monospace; font-size: 14px; line-height: 2; }
+  .box.after { border: 2px solid var(--main); }
+  .tree { font-size: 15px; line-height: 2; background: var(--soft); border-radius: 10px; padding: 8px 14px; margin-bottom: 10px; }
   .tree b { color: var(--main); }
+  .pain { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+  .pain div { background: #fff; border-radius: 12px; padding: 14px 16px; border: 1px solid var(--line); }
+  .pain div::before { content: "こんなこと、ありませんか？"; display: block; font-size: 11px; color: var(--sub); }
+  .who { margin-top: 40px; }
+  .who:first-of-type { margin-top: 0; }
+  .who h3.label { display: inline-block; font-size: 14px; background: var(--main); color: #fff; padding: 2px 12px; border-radius: 999px; margin-bottom: 12px; }
+  .card .before { display: block; font-size: 13px; color: var(--sub); text-decoration: line-through; margin: 4px 0; }
   .num { font-size: 32px; font-weight: 800; color: var(--main); line-height: 1.2; }
   .preview { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
   .preview a { display: block; text-decoration: none; color: #fff; border-radius: 14px; padding: 24px 20px; min-height: 140px; }
   .preview small { display: block; opacity: .85; margin-top: 6px; }
-  ol.steps li { margin-bottom: 8px; }
+  ol.steps { padding-left: 1.4em; }
+  ol.steps li { margin-bottom: 10px; }
+  ol.steps small { display: block; color: var(--sub); }
+  details { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; margin-bottom: 10px; }
+  summary { font-weight: 700; cursor: pointer; }
+  details p { margin: 8px 0 0; color: var(--sub); }
+  .big { font-size: clamp(20px, 4vw, 26px); font-weight: 800; line-height: 1.5; }
   @media (max-width: 700px) { .flow { grid-template-columns: 1fr; } .flow .arrow { transform: rotate(90deg); } }
 </style>
 </head>
 <body class="jrera">
 
 <div class="hero"><div class="wrap">
-  <div class="eyebrow">J-RERA ／ 横浜BW陸上クラブ ／ HERO'S</div>
-  <h1>3つのサイトと支払いを、<br>ひとつにまとめる提案</h1>
-  <p>ブランドは3つともそのまま。置き場所・ドメイン・支払いをそろえて、見る人にも、管理する側にも楽な形にします。</p>
-  <div class="btns"><a class="btn" href="#preview">試作を見る</a></div>
+  <div class="eyebrow">J-RERA ／ 横浜BW陸上クラブ ／ HERO'S　ご提案</div>
+  <h1>コーチは、教えることに<br>集中できるように。</h1>
+  <p>3つのホームページと支払いを、ひとつにまとめます。ブランドはそのまま。保護者は迷わず申し込めて、運営する側は「誰が払ったか」をスマホでひと目で確認できる形にします。</p>
+  <div class="btns"><a class="btn" href="#preview">試作を見る</a><a class="btn ghost" href="#points">何が変わるか</a></div>
 </div></div>
 
 <section><div class="wrap">
+  <h2>いま、困っていること</h2>
+  <p class="lead">事業が増えるほど、ホームページと支払いの管理がバラバラになっていきます。</p>
+  <div class="pain">
+    <div>サイトごとに作り方もログインも違い、直すたびに思い出すのが大変</div>
+    <div>サイトのアドレス（URL）がバラバラで、同じ会社だと伝わらない</div>
+    <div>「誰が年会費を払ったか」を確かめるのに時間がかかる</div>
+    <div>未払いの人に催促するのが気まずい</div>
+    <div>クラブの子にパーソナルも勧めたいのに、サイト同士がつながっていない</div>
+    <div>BW のサイトの下に、作成サービスの広告が出てしまう</div>
+  </div>
+</div></section>
+
+<section class="alt"><div class="wrap">
   <h2>いまと、これから</h2>
   <p class="lead">バラバラなものを、1か所にまとめます。</p>
   <div class="flow">
     <div class="box">
       <h3>いま</h3>
       <ul>
-        <li>J-RERA … Webnode（<code>j-rera.com</code>）</li>
-        <li>BW陸上クラブ … Webnode（<code>〜.webnode.jp</code>）</li>
-        <li>HERO'S … Square Online（<code>〜.square.site</code>）</li>
-        <li>作る道具が2つ、アドレスが3種類</li>
-        <li>BW のサイトの下に「Webnode で無料作成」の広告が出る</li>
-        <li>3つのサイトが互いにリンクしていない</li>
+        <li>J-RERA … Webnode（j-rera.com）</li>
+        <li>BW陸上クラブ … Webnode（別のアドレス）</li>
+        <li>HERO'S … Square のサイト（別のアドレス）</li>
+        <li>作るサービスが2つ、アドレスが3種類</li>
+        <li>3つのサイトが互いにつながっていない</li>
       </ul>
     </div>
     <div class="arrow">→</div>
-    <div class="box">
+    <div class="box after">
       <h3>これから</h3>
       <div class="tree">
-        <b>j-rera.com</b> ……… 会社<br>
-        ├ <b>bw.j-rera.com</b> ……… クラブ<br>
-        └ <b>heros.j-rera.com</b> … パーソナル
+        <b>j-rera.com</b>　会社<br>
+        ├ <b>bw.j-rera.com</b>　クラブ<br>
+        └ <b>heros.j-rera.com</b>　パーソナル
       </div>
       <ul>
-        <li>ドメインは今の j-rera.com だけ（新しく取らない）</li>
-        <li>支払いは <strong>Square</strong> に一本化</li>
-        <li>広告なし、3つが下のリンクでつながる</li>
+        <li>アドレスは今の <b>j-rera.com</b> ひとつに（新しく買わない）</li>
+        <li>支払いは <b>Square のカード払い</b>にそろえる</li>
+        <li>更新は <b>LINE で頼むだけ</b></li>
       </ul>
+    </div>
+  </div>
+</div></section>
+
+<section id="points"><div class="wrap">
+  <h2>何が変わるか</h2>
+  <p class="lead">使う人それぞれに、うれしいことがあります。</p>
+
+  <div class="who">
+    <h3 class="label">保護者・選手にとって</h3>
+    <div class="grid">
+      <div class="card"><h3>夜でも、スマホで申し込める</h3><span class="before">問い合わせて、返事を待って、振込</span><p>空いている日を選んで、カードで払えば予約完了。24時間いつでもできます。</p></div>
+      <div class="card"><h3>料金と予定がすぐ分かる</h3><span class="before">料金は問い合わせないと分からない</span><p>料金は表で、今月の活動日は一覧で。「いつ・いくら」がすぐ分かるので、問い合わせる前に安心できます。</p></div>
+      <div class="card"><h3>クラブとパーソナルを行き来できる</h3><p>「もっと練習したい」と思ったら、クラブのページからそのままパーソナルへ。会員の特別価格も分かります。</p></div>
+    </div>
+  </div>
+
+  <div class="who">
+    <h3 class="label">運営する側にとって</h3>
+    <div class="grid">
+      <div class="card"><h3>入金の確認がいらない</h3><span class="before">通帳と名簿を見比べる</span><p>カードで払われた時点で、Square が自動で記録。「誰が・いつ・何を払ったか」が一覧に出ます。</p></div>
+      <div class="card"><h3>催促が気まずくない</h3><span class="before">個別に連絡して「まだですか？」</span><p>未払いの人には、ボタンひとつで請求のメールを送れます。メールには支払いのリンクが付いているので、相手もその場で払えます。</p></div>
+      <div class="card"><h3>サイトを触らなくていい</h3><span class="before">ログインして、慣れない画面で編集</span><p>「予定が変わった」「写真を替えたい」は LINE で送るだけ。こちらで直して、すぐ反映します。</p></div>
+      <div class="card"><h3>全部スマホで見られる</h3><p>売上も予約も未払いも、練習の合間にスマホで確認できます。</p></div>
+    </div>
+  </div>
+
+  <div class="who">
+    <h3 class="label">会社にとって</h3>
+    <div class="grid">
+      <div class="card"><h3>「ちゃんとした会社」に見える</h3><p>3つのサイトの下に「運営：合同会社J-RERA」とそろえて出すので、信頼感が増します。広告も出ません。</p></div>
+      <div class="card"><h3>検索で見つけてもらいやすい</h3><p>「横浜 かけっこ 教室」「陸上クラブ 横浜」などで出やすいよう、ページの題名と説明を整えます。</p></div>
+      <div class="card"><h3>数字で事業が見える</h3><p>どのブランドがどれだけ伸びているか、クラブ生のうち何人がパーソナルも受けているか。次の手を考える材料になります。</p></div>
+      <div class="card"><h3>海外にも見せられる</h3><p>英語のページも作れます。コーチは英語でも指導できるので、国際交流や海外の選手にも届けられます。</p></div>
+      <div class="card"><h3>ブランドはそのまま</h3><p>J-RERA のオレンジ、BW のテラコッタ、HERO'S の黒。今の名前・色・ロゴを大切に残します。</p></div>
+      <div class="card"><h3>事業が増えても安心</h3><p>新しい教室やイベントを始めても、同じアドレスの下に並べるだけ。新しくドメインを買う必要はありません。</p></div>
     </div>
   </div>
 </div></section>
 
 <section class="alt"><div class="wrap">
-  <h2>できること</h2>
-  <div class="grid">
-    <div class="card"><span class="tag">ブランド</span><h3>名前と見た目はそのまま</h3><p>J-RERA はオレンジ、BW はテラコッタ、HERO'S は黒。今のサイトの色とロゴを残し、運営が J-RERA だと分かる共通の下の欄だけそろえます。</p></div>
-    <div class="card"><span class="tag">つながり</span><h3>クラブ ⇔ パーソナル</h3><p>クラブのページから「会員はパーソナルが特別価格」、パーソナルのページから「クラブも見る」。お互いにお客さんを送り合えます。</p></div>
-    <div class="card"><span class="tag">支払い</span><h3>全部 Square のカード払い</h3><p>パーソナルは予約と同時に支払い。クラブの年会費・ビジター代・大会費も Square の支払いリンクで。売上もお客さんも Square の1画面で見られます。</p></div>
-    <div class="card"><span class="tag">管理</span><h3>支払いがひと目で分かる</h3><p>Square のデータを取り込んで、会員ごとに「年会費・保険・大会費を払ったか」を一覧に。未払いの人には Square の請求書をまとめて送り直せます。</p></div>
-    <div class="card"><span class="tag">更新</span><h3>連絡するだけ</h3><p>「今月の予定」「料金が変わった」「写真を替えたい」は LINE で送るだけ。こちらで直して、すぐ反映します。</p></div>
-    <div class="card"><span class="tag">見やすさ</span><h3>スマホで見やすく</h3><p>保護者はほぼスマホで見ます。料金は表で、予定は一覧で、申込ボタンはいつも目に入る場所に。</p></div>
-    <div class="card"><span class="tag">検索</span><h3>見つけてもらいやすく</h3><p>「横浜 かけっこ 教室」「陸上クラブ 横浜」などで出やすいよう、ページの題名と説明を整えます。</p></div>
-  </div>
-</div></section>
-
-<section><div class="wrap">
   <h2>お金のこと</h2>
   <div class="grid">
-    <div class="card"><div class="num">0円</div><h3>サイトの置き場所</h3><p>無料のホスティングに置くので、月額はかかりません。</p></div>
-    <div class="card"><div class="num">今のまま</div><h3>ドメイン</h3><p>j-rera.com の更新費だけ。BW・HERO'S用に新しく取る必要はありません。</p></div>
-    <div class="card"><div class="num">↓</div><h3>減らせるかも</h3><p>Webnode や Square Online の有料プランを使っていれば、解約できます。Square の決済の手数料は今と同じです。</p></div>
+    <div class="card"><div class="num">0円</div><h3>サイトを置いておく費用</h3><p>無料で使える場所に置くので、毎月のサイト代はかかりません。</p></div>
+    <div class="card"><div class="num">今のまま</div><h3>アドレス（j-rera.com）</h3><p>今払っている更新費だけ。BW・HERO'S のために新しく買う必要はありません。</p></div>
+    <div class="card"><div class="num">↓</div><h3>減らせるかも</h3><p>Webnode や Square のサイト作成で有料プランを使っていれば、やめられます。カード払いの手数料は今の Square と同じです。</p></div>
   </div>
 </div></section>
 
-<section class="alt" id="preview"><div class="wrap">
+<section id="preview"><div class="wrap">
   <h2>試作</h2>
-  <p class="lead">今のサイトの文章を使って作った見本です。写真・日程・HERO'S の料金は仮です。</p>
+  <p class="lead">今のサイトの文章を使って作った見本です。触って動きを確かめてください。写真・日程・HERO'S の料金は仮のものです。</p>
   <div class="preview">
     <a href="./" style="background:#e8700f">合同会社J-RERA<small>会社のトップ。2つの事業への入口</small></a>
     <a href="bw/" style="background:#c0633a">横浜BW陸上クラブ<small>メソッド・活動・今月の予定・費用・体験申込</small></a>
-    <a href="heros/" style="background:#1d1d1f">HERO'S パーソナルかけっこ塾<small>メニュー・受け方・Square 予約</small></a>
-    <a href="admin/" style="background:#2e7d32">支払い管理（管理する側の画面）<small>会員ごとの支払い状況・未払い・ブランド別の売上・パーソナル予約</small></a>
+    <a href="heros/" style="background:#1d1d1f">HERO'S パーソナルかけっこ塾<small>レッスンの流れ・講師紹介・Square 予約</small></a>
+    <a href="admin/" style="background:#2e7d32">支払い管理（運営する側の画面）<small>会員ごとの支払い状況・未払い・売上・予約</small></a>
   </div>
+</div></section>
+
+<section class="alt"><div class="wrap">
+  <h2>よくある質問</h2>
+  <details><summary>パソコンやホームページに詳しくなくても大丈夫？</summary><p>大丈夫です。作るのも直すのもこちらでやります。お願いしたいのは、LINE で「ここを変えたい」と送ることだけです。</p></details>
+  <details><summary>今のサイトはどうなりますか？</summary><p>新しいサイトができあがって、見て OK をもらってから切り替えます。切り替えの間もサイトが見られなくなることはありません。</p></details>
+  <details><summary>振込で払いたい人はどうする？</summary><p>しばらくは振込も残せます。支払い管理の画面に「振込で受け取った」と記録できるようにすれば、カードと振込をまとめて見られます。</p></details>
+  <details><summary>カードの情報は安全？</summary><p>カードの情報は Square がお預かりし、こちらのサイトには残りません。今の HERO'S の支払いと同じ仕組みです。</p></details>
+  <details><summary>アカウントは誰のものになる？</summary><p>アドレスも Square も、会社（合同会社J-RERA）の名義のままです。こちらは管理をお手伝いする立場なので、いつでも元に戻せます。</p></details>
 </div></section>
 
 <section><div class="wrap">
   <h2>進め方</h2>
   <ol class="steps">
-    <li>この形でよいか、見てもらう（直したいところを教えてもらう）</li>
-    <li>ログインを共有してもらう … ドメインの管理画面、Webnode、Square（スタッフ権限で可）</li>
+    <li>この試作を見て、直したいところを教えてもらう</li>
+    <li>ログインを共有してもらう<small>サイトのアドレスの管理画面、Webnode、Square（スタッフとして招待でも可）</small></li>
     <li>料金・写真・載せたくないもの（子どもの顔など）を確認</li>
     <li>本番のサイトを作り、見てもらってから切り替え</li>
-    <li>Square の予約・支払いリンクをつなぐ</li>
+    <li>Square の予約・支払いをつなぎ、支払い管理の画面を使い始める</li>
   </ol>
-  <p style="color:var(--sub);font-size:14px">アカウントとドメインは会社（合同会社J-RERA）の名義のまま、こちらは管理を手伝う形にします。</p>
+  <p class="big" style="margin-top:32px">まずは、試作を触ってみてください。<br>「ここはこうしたい」を聞かせてもらえれば、すぐ形にします。</p>
 </div></section>
 
-<footer class="family"><div class="wrap"><div class="copy">提案用の試作</div></div></footer>
+<footer class="family"><div class="wrap"><div class="copy">ご提案用の試作</div></div></footer>
 </body>
 </html>
