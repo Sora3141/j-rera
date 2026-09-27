@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>J-RERA｜横浜の陸上クラブとかけっこパーソナル</title>
+<meta name="description" content="沢山より、正しく走る。横浜BW陸上クラブと HERO'S パーソナルかけっこ塾。小学生からマスターズまで。運営：合同会社J-RERA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,700;1,700;1,800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --track: #1f3fae;       /* 青いトラック */
+  --track-deep: #13287a;
+  --wind: #f07a16;        /* J-RERA のオレンジ＝風 */
+  --sky: #eef3f9;
+  --paper: #ffffff;
+  --ink: #14213d;
+  --sub: #55627a;
+  --line: #d5dde8;
+  --bw: #c0633a;
+  --heros: #1d1d1f;
+  --jp: "Zen Kaku Gothic New", "Hiragino Sans", system-ui, sans-serif;
+  --num: "Barlow Condensed", "Zen Kaku Gothic New", sans-serif;
+  --gutter: clamp(16px, 5vw, 64px);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body { margin: 0; background: var(--sky); color: var(--ink); font: 400 16px/1.9 var(--jp); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--wind); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 var(--gutter); }
+.num { font-family: var(--num); font-feature-settings: "tnum"; }
+
+.mock { background: var(--ink); color: #c9d3e3; font-size: 12px; text-align: center; padding: 4px 16px; }
+.mock a { color: #fff; }
+
+/* ヘッダー */
+.top { position: sticky; top: 0; z-index: 20; background: rgba(238,243,249,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; gap: 24px; height: 64px; }
+.brand { display: flex; align-items: baseline; gap: 10px; text-decoration: none; }
+.brand b { font: italic 800 26px/1 var(--num); letter-spacing: .01em; }
+.brand b span { color: var(--wind); }
+.brand small { font-size: 12px; color: var(--sub); }
+.top nav { margin-left: auto; display: flex; gap: 22px; font-size: 14px; font-weight: 500; }
+.top nav a { text-decoration: none; }
+.top nav a:hover { color: var(--track); }
+.cta { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 24px;
+  border-radius: 999px; border: 0; background: var(--wind); color: var(--ink); font-weight: 700; text-decoration: none; cursor: pointer; white-space: nowrap; }
+.cta:hover { background: #ff8a2a; }
+.cta.line { background: transparent; color: #fff; box-shadow: inset 0 0 0 2px rgba(255,255,255,.7); }
+.cta.line:hover { background: rgba(255,255,255,.1); }
+.cta.dark { background: var(--ink); color: #fff; }
+.cta.dark:hover { background: var(--track); }
+.top .cta { min-height: 40px; padding: 0 18px; font-size: 14px; }
+@media (max-width: 860px) { .top nav { display: none; } .top .cta { margin-left: auto; } .brand small { display: none; } }
+
+/* ヒーロー：真上から見たトラック */
+.hero { position: relative; overflow: hidden; background: var(--track); color: #fff; min-height: min(760px, calc(100svh - 90px)); display: flex; align-items: center; }
+.hero .lanes { position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(to bottom, transparent 0 calc(25% - 2px), rgba(255,255,255,.55) calc(25% - 2px) 25%); }
+.hero .lanes i { position: absolute; left: var(--gutter); font: italic 800 clamp(20px, 3vw, 30px)/1 var(--num); color: rgba(255,255,255,.35); transform: translateY(-50%); }
+.hero .start { position: absolute; top: 0; bottom: 0; left: calc(var(--gutter) + 48px); width: 3px; background: rgba(255,255,255,.55); }
+.hero .gust { position: absolute; left: -40%; top: 62.5%; height: 4px; width: 40%; background: linear-gradient(90deg, transparent, var(--wind)); border-radius: 4px;
+  animation: gust 1.6s .5s cubic-bezier(.3,.1,.2,1) forwards; }
+@keyframes gust { to { left: 110%; } }
+.hero .wrap { position: relative; width: 100%; padding-top: 56px; padding-bottom: 64px; }
+.hero .inner { margin-left: clamp(48px, 7vw, 96px); }
+.hero h1 { margin: 0; font-weight: 900; font-size: clamp(40px, 10vw, 132px); white-space: nowrap; line-height: 1.02; letter-spacing: -.03em;
+  transform: skewX(-8deg); transform-origin: left bottom; text-shadow: 0 2px 30px rgba(10,20,70,.25); }
+.hero h1 .line2 { display: block; padding-left: .9em; }
+.hero p { max-width: 30em; margin: 28px 0 0; font-size: clamp(15px, 1.8vw, 18px); color: #dfe7ff; }
+.hero .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+@media (max-width: 600px) { .hero .inner { margin-left: 40px; } .hero .start { left: calc(var(--gutter) + 30px); } .hero h1 .line2 { padding-left: .5em; } .hero h1 { font-size: 12.5vw; } }
+
+section { padding: clamp(64px, 10vw, 120px) 0; }
+h2 { margin: 0; font-weight: 900; font-size: clamp(30px, 5vw, 52px); line-height: 1.25; letter-spacing: -.01em; }
+.intro { max-width: 34em; margin: 16px 0 0; color: var(--sub); }
+
+/* レーン */
+.lanes-sec { background: var(--paper); }
+.lane-list { margin-top: 48px; border-top: 2px solid var(--ink); }
+.lane { display: grid; grid-template-columns: 96px 1fr auto; gap: 8px 32px; align-items: center; padding: 32px 0; border-bottom: 2px solid var(--ink); }
+.lane .no { font: italic 800 88px/.9 var(--num); color: var(--c); }
+.lane h3 { margin: 0; font-size: clamp(22px, 3vw, 30px); font-weight: 900; line-height: 1.3; }
+.lane .kind { display: block; font-size: 13px; font-weight: 700; color: var(--c); }
+.lane p { margin: 6px 0 0; color: var(--sub); max-width: 40em; }
+.lane .facts { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 10px; font-size: 14px; font-weight: 500; }
+.lane .facts b { font-family: var(--num); font-size: 20px; font-weight: 700; }
+.lane .go { justify-self: end; }
+.lane .go .cta { background: var(--c); color: #fff; }
+.lane .go .cta:hover { filter: brightness(1.15); }
+@media (max-width: 760px) { .lane { grid-template-columns: 56px 1fr; } .lane .no { font-size: 56px; align-self: start; } .lane .go { grid-column: 2; justify-self: start; } }
+
+/* 合うレーンを探す */
+.finder { background: var(--sky); }
+.finder .board { margin-top: 40px; display: grid; gap: 28px; grid-template-columns: 1fr 380px; align-items: start; }
+.q { border: 0; padding: 0; margin: 0 0 24px; }
+.q legend { font-weight: 700; margin-bottom: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips input { position: absolute; opacity: 0; pointer-events: none; }
+.chips label { padding: 10px 18px; border-radius: 999px; background: var(--paper); border: 1.5px solid var(--line); cursor: pointer; font-size: 15px; font-weight: 500; transition: background .15s, border-color .15s; }
+.chips label:hover { border-color: var(--track); }
+.chips input:checked + label { background: var(--ink); border-color: var(--ink); color: #fff; }
+.chips input:focus-visible + label { outline: 3px solid var(--wind); outline-offset: 2px; }
+.result { position: sticky; top: 88px; background: var(--paper); border-radius: 20px; padding: 28px; border: 1.5px solid var(--line); min-height: 260px; }
+.result .hint { color: var(--sub); }
+.result .pick { display: flex; align-items: baseline; gap: 12px; }
+.result .pick .no { font: italic 800 64px/1 var(--num); color: var(--c); }
+.result h3 { margin: 0; font-size: 22px; font-weight: 900; line-height: 1.35; }
+.result p { color: var(--sub); margin: 12px 0 20px; }
+.result .also { font-size: 14px; color: var(--sub); margin-top: 16px; }
+@media (max-width: 900px) { .finder .board { grid-template-columns: 1fr; } .result { position: static; } }
+
+/* メソッド：ももの角度 */
+.method { background: var(--track-deep); color: #fff; }
+.method .intro { color: #bfcbef; }
+.method .cols { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
+.method blockquote { margin: 32px 0 0; padding: 0; font-size: 17px; color: #dfe7ff; max-width: 30em; }
+.method .facts { display: flex; gap: 32px; margin-top: 36px; flex-wrap: wrap; }
+.method .facts div { font-size: 14px; color: #bfcbef; }
+.method .facts b { display: block; font: 700 44px/1.1 var(--num); color: #fff; }
+.lab { background: var(--track); border-radius: 24px; padding: 24px; position: relative; overflow: hidden; }
+.lab svg { width: 100%; height: auto; display: block; }
+.lab .verdict { margin: 8px 0 12px; }
+.lab .verdict b { display: block; font-size: 24px; font-weight: 900; line-height: 1.4; }
+.lab .verdict span { font-size: 14px; color: #dfe7ff; }
+.lab input[type=range] { width: 100%; accent-color: var(--wind); height: 32px; }
+.lab .scale { display: flex; justify-content: space-between; font-size: 12px; color: #bfcbef; }
+.lab .note { font-size: 12px; color: #bfcbef; margin: 12px 0 0; }
+@media (max-width: 860px) { .method .cols { grid-template-columns: 1fr; } }
+
+/* コーチ */
+.coach { background: var(--paper); }
+.coach .cols { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(32px, 6vw, 80px); align-items: start; margin-top: 48px; }
+.coach .name { font-size: clamp(28px, 4vw, 40px); font-weight: 900; line-height: 1.3; margin: 0; }
+.coach .role { color: var(--sub); margin: 4px 0 20px; }
+.coach .photo { aspect-ratio: 4 / 5; border-radius: 20px; background: repeating-linear-gradient(to bottom, var(--sky) 0 23%, var(--line) 23% 24%); display: grid; place-items: center; color: var(--sub); font-size: 14px; margin-bottom: 24px; }
+.coach ul.creds { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.coach ul.creds li { font-size: 13px; background: var(--sky); padding: 4px 12px; border-radius: 999px; }
+table.results { width: 100%; border-collapse: collapse; }
+table.results caption { text-align: left; font-weight: 700; padding-bottom: 12px; }
+table.results td { padding: 12px 0; border-bottom: 1px solid var(--line); vertical-align: baseline; }
+table.results td.y { font: 500 20px/1 var(--num); color: var(--sub); width: 4.2em; }
+table.results td.r { text-align: right; font-weight: 700; white-space: nowrap; }
+table.results tr.gold td.r { color: var(--wind); }
+
+/* 予定と料金 */
+.plan { background: var(--sky); }
+.plan .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px; align-items: start; }
+.panel { background: var(--paper); border-radius: 20px; padding: clamp(20px, 3vw, 32px); }
+.panel h3 { margin: 0 0 4px; font-size: 20px; font-weight: 900; }
+.panel .sub { margin: 0 0 16px; color: var(--sub); font-size: 14px; }
+.days { list-style: none; margin: 0; padding: 0; }
+.days li { display: grid; grid-template-columns: 76px 1fr auto; gap: 12px; align-items: center; padding: 14px 0; border-top: 1px solid var(--line); }
+.days .d { font: 700 30px/1 var(--num); }
+.days .d small { display: block; font: 500 12px/1.4 var(--jp); color: var(--sub); }
+.days .w { font-size: 15px; font-weight: 700; }
+.days .w small { display: block; font-weight: 400; color: var(--sub); font-size: 13px; }
+.join { min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1.5px solid var(--ink); background: transparent; font-size: 13px; font-weight: 700; cursor: pointer; }
+.join[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.tabs { display: inline-flex; background: var(--sky); border-radius: 999px; padding: 4px; margin-bottom: 16px; }
+.tabs button { border: 0; background: transparent; padding: 8px 18px; border-radius: 999px; font-size: 14px; font-weight: 700; cursor: pointer; color: var(--sub); }
+.tabs button[aria-selected="true"] { background: var(--paper); color: var(--ink); box-shadow: 0 1px 3px rgba(20,33,61,.15); }
+dl.price { margin: 0; }
+dl.price div { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-top: 1px solid var(--line); }
+dl.price dt small { display: block; color: var(--sub); font-size: 13px; }
+dl.price dd { margin: 0; font: 700 22px/1.3 var(--num); white-space: nowrap; }
+dl.price dd small { font: 500 13px var(--jp); }
+.perk { margin-top: 16px; padding: 14px 16px; border-radius: 14px; background: #fff4ea; font-size: 14px; }
+@media (max-width: 860px) { .plan .cols { grid-template-columns: 1fr; } }
+
+/* はじめる */
+.start-sec { background: var(--paper); }
+.steps { list-style: none; padding: 0; margin: 48px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; counter-reset: s; border-top: 2px solid var(--ink); }
+.steps li { padding: 24px 24px 24px 0; counter-increment: s; }
+.steps li::before { content: counter(s); display: block; font: italic 800 48px/1 var(--num); color: var(--wind); margin-bottom: 8px; }
+.steps b { display: block; font-size: 18px; }
+.steps span { color: var(--sub); font-size: 15px; }
+.doors { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+.door { border-radius: 20px; padding: 28px; color: #fff; background: var(--c); display: flex; flex-direction: column; gap: 12px; }
+.door h3 { margin: 0; font-size: 22px; font-weight: 900; }
+.door p { margin: 0; opacity: .9; }
+.door .cta { align-self: flex-start; margin-top: auto; background: #fff; color: var(--ink); }
+.door form { display: grid; gap: 10px; }
+.door label { font-size: 13px; font-weight: 700; }
+.door input, .door select { width: 100%; min-height: 44px; padding: 8px 12px; border-radius: 10px; border: 0; color: var(--ink); background: #fff; margin-top: 4px; }
+.done { display: none; background: rgba(255,255,255,.15); border-radius: 12px; padding: 12px 14px; }
+@media (max-width: 760px) { .steps { grid-template-columns: 1fr; } .steps li { padding: 20px 0; border-bottom: 1px solid var(--line); } .doors { grid-template-columns: 1fr; } }
+
+/* 風 */
+.wind { background: var(--ink); color: #fff; position: relative; overflow: hidden; }
+.wind .big { font-weight: 900; font-size: clamp(34px, 6vw, 72px); line-height: 1.25; margin: 0; letter-spacing: -.02em; }
+.wind .big .word { font: italic 800 1.15em/1 var(--num); color: var(--wind); letter-spacing: .02em; }
+.wind p { max-width: 36em; color: #c9d3e3; margin: 28px 0 0; }
+.wind .values { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.2); }
+.wind .values b { display: block; font: 700 24px/1.2 var(--num); }
+.wind .values span { font-size: 14px; color: #c9d3e3; }
+@media (max-width: 760px) { .wind .values { grid-template-columns: 1fr 1fr; } }
+
+footer { background: var(--ink); color: #9aa8bf; font-size: 13px; padding: 0 0 40px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; border-top: 1px solid rgba(255,255,255,.12); padding-top: 24px; }
+footer a { text-decoration: none; color: #dbe3f0; }
+footer .copy { margin-left: auto; }
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .hero .gust { animation: none; display: none; } * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="mock">別案の試作です（写真・日程・HERO'S の料金は仮）｜<a href="../proposal.html">提案ページへ</a></div>
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="#"><b>J-RER<span>A</span></b><small>横浜BW陸上クラブ ／ HERO'S パーソナルかけっこ塾</small></a>
+  <nav aria-label="ページ内">
+    <a href="#lanes">クラブとパーソナル</a><a href="#method">メソッド</a><a href="#coach">コーチ</a><a href="#plan">予定と料金</a>
+  </nav>
+  <a class="cta" href="#start">無料体験</a>
+</div></header>
+
+<main>
+<section class="hero" aria-labelledby="hero-title">
+  <div class="lanes" aria-hidden="true"><i style="top:12.5%">1</i><i style="top:37.5%">2</i><i style="top:62.5%">3</i><i style="top:87.5%">4</i></div>
+  <div class="start" aria-hidden="true"></div>
+  <div class="gust" aria-hidden="true"></div>
+  <div class="wrap"><div class="inner">
+    <h1 id="hero-title">沢山より、<span class="line2">正しく走る。</span></h1>
+    <p>横浜の陸上クラブと、マンツーマンのかけっこ塾。スポーツ科学にもとづく「保土ケ谷メソッド」で、小学生からマスターズまで教えています。</p>
+    <div class="actions">
+      <a class="cta" href="#start">無料体験に申し込む</a>
+      <a class="cta line" href="#finder">自分に合う方を探す</a>
+    </div>
+  </div></div>
+</section>
+
+<section class="lanes-sec" id="lanes" aria-labelledby="lanes-title"><div class="wrap">
+  <h2 id="lanes-title">走り方は、ふたつ。</h2>
+  <p class="intro">仲間と一緒に走るクラブと、ひとりに合わせて直すパーソナル。どちらも同じコーチ、同じメソッドです。組み合わせると、上達が早くなります。</p>
+  <div class="lane-list">
+    <article class="lane" style="--c: var(--bw)">
+      <span class="no" aria-hidden="true">1</span>
+      <div>
+        <span class="kind">クラブ</span>
+        <h3>横浜BW陸上クラブ</h3>
+        <p>日産スタジアムや三ツ沢の競技場で、月3〜4回の活動日に集まって走ります。大会にも一緒に出ます。</p>
+        <div class="facts"><span>年会費 <b class="num">10,000</b>円</span><span>お月謝なし</span><span>小学生〜マスターズ</span></div>
+      </div>
+      <div class="go"><a class="cta" href="#plan">活動日を見る</a></div>
+    </article>
+    <article class="lane" style="--c: var(--heros)">
+      <span class="no" aria-hidden="true">2</span>
+      <div>
+        <span class="kind">パーソナル</span>
+        <h3>HERO'S パーソナルかけっこ塾</h3>
+        <p>その子の走りを見て、その場で直すマンツーマン。動画で撮って、自分の目で確かめます。運動会の前にも。</p>
+        <div class="facts"><span>60分</span><span>スマホで予約・カード払い</span><span>クラブ会員は特別価格</span></div>
+      </div>
+      <div class="go"><a class="cta" href="#start">予約する</a></div>
+    </article>
+    <article class="lane" style="--c: var(--track)">
+      <span class="no" aria-hidden="true">3</span>
+      <div>
+        <span class="kind">国際交流</span>
+        <h3>海外とのスポーツ交流</h3>
+        <p>マカオ大学への指導、香港代表選手の指導など。英語でも教えられます。学校や団体からの相談も受けています。</p>
+      </div>
+      <div class="go"><a class="cta" href="#contact">相談する</a></div>
+    </article>
+  </div>
+</div></section>
+
+<section class="finder" id="finder" aria-labelledby="finder-title"><div class="wrap">
+  <h2 id="finder-title">どちらが合うか、3つ答えてみてください。</h2>
+  <div class="board">
+    <form id="finderForm" aria-describedby="finder-title">
+      <fieldset class="q"><legend>走るのはだれですか？</legend><div class="chips">
+        <input type="radio" name="who" id="w1" value="kid"><label for="w1">小学生</label>
+        <input type="radio" name="who" id="w2" value="teen"><label for="w2">中学生・高校生</label>
+        <input type="radio" name="who" id="w3" value="adult"><label for="w3">大学生・大人</label>
+        <input type="radio" name="who" id="w4" value="masters"><label for="w4">マスターズ（35歳以上）</label>
+      </div></fieldset>
+      <fieldset class="q"><legend>いちばんの目的は？</legend><div class="chips">
+        <input type="radio" name="goal" id="g1" value="undokai"><label for="g1">運動会で速くなりたい</label>
+        <input type="radio" name="goal" id="g2" value="meet"><label for="g2">大会に出たい</label>
+        <input type="radio" name="goal" id="g3" value="sport"><label for="g3">ほかのスポーツに活かしたい</label>
+        <input type="radio" name="goal" id="g4" value="time"><label for="g4">記録を伸ばしたい</label>
+      </div></fieldset>
+      <fieldset class="q"><legend>どう練習したいですか？</legend><div class="chips">
+        <input type="radio" name="how" id="h1" value="group"><label for="h1">仲間と一緒に</label>
+        <input type="radio" name="how" id="h2" value="solo"><label for="h2">マンツーマンで</label>
+        <input type="radio" name="how" id="h3" value="unsure"><label for="h3">まだ決めていない</label>
+      </div></fieldset>
+    </form>
+    <div class="result" id="result" aria-live="polite">
+      <p class="hint">答えると、ここにおすすめが出ます。</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="method" id="method" aria-labelledby="method-title"><div class="wrap"><div class="cols">
+  <div>
+    <h2 id="method-title">「ももを高く」の、<br>その先へ。</h2>
+    <p class="intro">「もっと高く上げなさい」と言われて、上げすぎていませんか。ももを上げることを意識しすぎると、体が後ろに反って、前に進まなくなります。</p>
+    <blockquote>大学で「適切なもも上げの角度」を研究し、動き作り（スプリントドリル）にまとめたのが保土ケ谷メソッドです。無理のないフォームは故障を減らし、練習を続けられるから、速く強くなれます。</blockquote>
+    <div class="facts">
+      <div><b>2<small style="font-size:20px">名</small></b>日本代表に選ばれた選手</div>
+      <div><b>6<small style="font-size:20px">年</small></b>インターハイ出場・入賞を指導</div>
+    </div>
+  </div>
+  <div class="lab">
+    <svg viewBox="0 0 360 300" role="img" aria-labelledby="lab-title" id="runner">
+      <title id="lab-title">ももを上げる角度と、体の傾き・前に進む力の関係</title>
+      <line x1="0" y1="276" x2="360" y2="276" stroke="rgba(255,255,255,.5)" stroke-width="2"/>
+      <g id="arrow"><line id="arrowLine" x1="40" y1="40" x2="200" y2="40" stroke="#f07a16" stroke-width="6" stroke-linecap="round"/>
+        <path id="arrowHead" d="M0 0" fill="#f07a16"/>
+        <text x="40" y="24" fill="#dfe7ff" font-size="13" font-family="Zen Kaku Gothic New, sans-serif">前に進む力</text></g>
+      <g fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+        <polyline id="backLeg" points="180,160 190,220 172,274"/>
+        <polyline id="backArm"/>
+        <line id="torso"/>
+        <polyline id="frontLeg"/>
+        <polyline id="frontArm"/>
+      </g>
+      <circle id="head" r="17" fill="#fff"/>
+    </svg>
+    <div class="verdict"><b id="verdict">上げすぎ</b><span id="verdictNote">体が後ろに反って、前に進まない</span></div>
+    <label for="angle" class="scale" style="display:block;color:#fff;font-weight:700;font-size:14px">ももの高さを動かしてみる</label>
+    <input type="range" id="angle" min="25" max="120" value="108" aria-describedby="verdict">
+    <div class="scale"><span>低い</span><span>高い</span></div>
+    <p class="note">図はイメージです。ちょうどいい高さは一人ひとり違うので、レッスンで確かめます。</p>
+  </div>
+</div></div></section>
+
+<section class="coach" id="coach" aria-labelledby="coach-title"><div class="wrap">
+  <h2 id="coach-title">教えるのは、今も走っているコーチ。</h2>
+  <div class="cols">
+    <div>
+      <div class="photo">コーチの写真</div>
+      <p class="name">清水 隆太郎</p>
+      <p class="role">J-RERA 代表／横浜BW陸上クラブ・HERO'S コーチ</p>
+      <p>桐生選手・小池選手と同い年で、同じレースを何度も走ってきました。今も実業団選手として競技を続けながら、小学生から世界マスターズの選手まで教えています。日本語・英語で指導できます。</p>
+      <ul class="creds"><li>日本陸連認定ジュニアコーチ</li><li>日本スポーツ協会 公認スポーツ指導者</li><li>中学・高校 保健体育 教員免許</li></ul>
+    </div>
+    <table class="results">
+      <caption>おもな競技実績</caption>
+      <tbody>
+        <tr><td class="y">2013</td><td>全国高校総体</td><td class="r">6位入賞</td></tr>
+        <tr><td class="y">2014</td><td>U20日本選手権</td><td class="r">4位入賞</td></tr>
+        <tr><td class="y">2016</td><td>全日本学生陸上競技個人選手権</td><td class="r">6位入賞</td></tr>
+        <tr><td class="y">2017</td><td>日本選手権</td><td class="r">出場</td></tr>
+        <tr class="gold"><td class="y">2022</td><td>全国スポーツ祭典陸上</td><td class="r">優勝</td></tr>
+        <tr class="gold"><td class="y">2023</td><td>東日本実業団陸上大会</td><td class="r">優勝</td></tr>
+        <tr class="gold"><td class="y">2024</td><td>全国スポーツ祭典陸上</td><td class="r">優勝</td></tr>
+        <tr class="gold"><td class="y">2025</td><td>秋季台北国際マスターズ M30</td><td class="r">優勝</td></tr>
+        <tr class="gold"><td class="y">2025</td><td>香港マスターズ陸上 M30</td><td class="r">優勝</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div></section>
+
+<section class="plan" id="plan" aria-labelledby="plan-title"><div class="wrap">
+  <h2 id="plan-title">いつ、いくら。</h2>
+  <p class="intro">活動日は毎月ここに出ます。参加する日を押しておくと、競技場の入場申込をこちらで済ませます。</p>
+  <div class="cols">
+    <div class="panel">
+      <h3>10月の活動日</h3>
+      <p class="sub">横浜BW陸上クラブ（仮の日程）</p>
+      <ul class="days">
+        <li><span class="d num">5<small>日曜</small></span><span class="w">活動日<small>日産スタジアム 9:00〜11:00</small></span><button class="join" aria-pressed="false">参加する</button></li>
+        <li><span class="d num">12<small>日曜</small></span><span class="w">活動日<small>小机フィールド 9:00〜11:00</small></span><button class="join" aria-pressed="false">参加する</button></li>
+        <li><span class="d num">19<small>日曜</small></span><span class="w">記録会<small>三ツ沢陸上競技場</small></span><button class="join" aria-pressed="false">参加する</button></li>
+        <li><span class="d num">26<small>日曜</small></span><span class="w">活動日<small>日産スタジアム 9:00〜11:00</small></span><button class="join" aria-pressed="false">参加する</button></li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div class="tabs" role="tablist" aria-label="料金">
+        <button role="tab" aria-selected="true" aria-controls="p-club" id="t-club">クラブ</button>
+        <button role="tab" aria-selected="false" aria-controls="p-heros" id="t-heros">パーソナル</button>
+      </div>
+      <div role="tabpanel" id="p-club" aria-labelledby="t-club">
+        <dl class="price">
+          <div><dt>年会費<small>毎回のお月謝はありません</small></dt><dd>10,000<small>円</small></dd></div>
+          <div><dt>スポーツ保険</dt><dd>1,450<small>円</small></dd></div>
+          <div><dt>ユニフォーム（上下）</dt><dd>16,000<small>円</small></dd></div>
+          <div><dt>陸連登録費<small>小学生・中学生・高校生・一般で異なります</small></dt><dd><small>区分による</small></dd></div>
+          <div><dt>大会エントリー費<small>大会ごと</small></dt><dd>1,000<small>円前後</small></dd></div>
+          <div><dt>ビジター参加<small>体験は初回無料</small></dt><dd>1,500<small>円/回</small></dd></div>
+        </dl>
+      </div>
+      <div role="tabpanel" id="p-heros" aria-labelledby="t-heros" hidden>
+        <dl class="price">
+          <div><dt>体験レッスン（60分）<small>走りを撮影して、直すところをお伝えします</small></dt><dd>—</dd></div>
+          <div><dt>パーソナル（60分）</dt><dd>—</dd></div>
+          <div><dt>回数券<small>運動会前の集中に</small></dt><dd>—</dd></div>
+        </dl>
+        <p class="sub" style="margin-top:12px">料金は今の HERO'S の内容を入れます。</p>
+      </div>
+      <div class="perk">クラブ会員は、パーソナルを特別価格で受けられます。支払いはどちらも Square のカード払いです。</div>
+    </div>
+  </div>
+</div></section>
+
+<section class="start-sec" id="start" aria-labelledby="start-title"><div class="wrap">
+  <h2 id="start-title">はじめかた</h2>
+  <ol class="steps">
+    <li><b>体験か予約を選ぶ</b><span>クラブは初回無料。パーソナルは空いている日時から選べます。</span></li>
+    <li><b>スマホで申し込む</b><span>パーソナルはその場でカード払い。クラブはコーチから案内が届きます。</span></li>
+    <li><b>競技場で走る</b><span>動きやすい服と運動靴で。場所は申し込んだあとにお知らせします。</span></li>
+  </ol>
+  <div class="doors">
+    <div class="door" style="--c: var(--bw)">
+      <h3>クラブの無料体験</h3>
+      <p>参加したい活動日を選んで送ってください。</p>
+      <form id="trial">
+        <label>お名前<input name="n" required autocomplete="name"></label>
+        <label>学年・年代<select name="g"><option>小学生</option><option>中学生</option><option>高校生</option><option>大学生・大人</option><option>マスターズ</option></select></label>
+        <label>メール<input name="m" type="email" required autocomplete="email"></label>
+        <label>参加したい日<select name="d"><option>10月5日（日）日産スタジアム</option><option>10月12日（日）小机フィールド</option><option>10月26日（日）日産スタジアム</option></select></label>
+        <button class="cta" style="margin-top:6px">体験を申し込む</button>
+        <p class="done" id="trialDone" role="status">申し込みを受け付けました（試作なので送信はしていません）。本番では、コーチから入場の案内がメールで届きます。</p>
+      </form>
+    </div>
+    <div class="door" style="--c: var(--heros)">
+      <h3>パーソナルの予約</h3>
+      <p>日時を選んで、カードで払えば予約完了。当日の支払いはありません。</p>
+      <p style="font-size:14px">本番では、ここに Square の予約画面が開きます。</p>
+      <a class="cta" href="#" id="book">空いている日時を見る</a>
+    </div>
+  </div>
+</div></section>
+
+<section class="wind" id="contact" aria-labelledby="wind-title"><div class="wrap">
+  <h2 class="big" id="wind-title"><span class="word">RERA</span> は、<br>アイヌ語で「風」。</h2>
+  <p>風は目に見えないけれど、走り、流れ、人と人を次へつないでいく。スポーツを通じて、国境・世代・文化を越えた出会いと成長の場をつくるのが、合同会社J-RERA です。「J」には Japan の意味を込めています。</p>
+  <div class="values">
+    <div><b>Respect</b><span>すべての人と文化への敬意</span></div>
+    <div><b>Trust</b><span>誠実な対応と信頼の積み重ね</span></div>
+    <div><b>Connection</b><span>ご縁を大切にし、想いをつなぐ</span></div>
+    <div><b>Challenge</b><span>新しい可能性への挑戦</span></div>
+  </div>
+  <div style="margin-top:48px"><a class="cta" href="mailto:info@example.com">J-RERA に問い合わせる</a></div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <a href="#lanes">横浜BW陸上クラブ</a><a href="#lanes">HERO'S パーソナルかけっこ塾</a><a href="#contact">会社情報</a><a href="#">特定商取引法に基づく表記</a>
+  <span class="copy">© 合同会社J-RERA</span>
+</div></footer>
+
+<script>
+// 合う方を探す
+const form = document.getElementById('finderForm'), out = document.getElementById('result');
+const LANE = {
+  bw: { no: 1, c: 'var(--bw)', name: '横浜BW陸上クラブ', href: '#plan', cta: '活動日を見る' },
+  heros: { no: 2, c: 'var(--heros)', name: "HERO'S パーソナルかけっこ塾", href: '#start', cta: '空いている日時を見る' },
+};
+form.addEventListener('change', () => {
+  const f = Object.fromEntries(new FormData(form));
+  if (!f.who || !f.goal || !f.how) {
+    const left = 3 - Object.keys(f).length;
+    out.innerHTML = `<p class="hint">あと${left}つ答えると、おすすめが出ます。</p>`;
+    return;
+  }
+  let pick, why, also = '';
+  if (f.how === 'group' || (f.how === 'unsure' && (f.goal === 'meet' || f.who === 'masters'))) {
+    pick = LANE.bw;
+    why = f.goal === 'meet' ? '大会に出たいなら、一緒にエントリーできるクラブが近道です。' : '仲間と競技場で走るのが、続けるいちばんのコツです。';
+    also = '活動日以外に直したいところがあれば、会員価格でパーソナルも受けられます。';
+  } else {
+    pick = LANE.heros;
+    why = f.goal === 'undokai' ? '運動会までの短い期間なら、その子に合わせて直すマンツーマンが早く効きます。'
+        : f.goal === 'sport' ? 'サッカーや野球の一歩目は、その競技に合わせた直し方がいちばんです。'
+        : 'その場で撮って、その場で直す。自分の走りを目で見て変えられます。';
+    also = '仲間と走りたくなったら、クラブの無料体験もあります。';
+  }
+  out.innerHTML = `<div class="pick" style="--c:${pick.c}"><span class="no" aria-hidden="true">${pick.no}</span><h3>${pick.name}</h3></div>
+    <p>${why}</p><a class="cta dark" href="${pick.href}">${pick.cta}</a><p class="also">${also}</p>`;
+});
+
+// ももの角度
+const $ = id => document.getElementById(id), deg = Math.PI / 180;
+function draw(a) {
+  const hip = [180, 160];
+  const lean = a > 82 ? (a - 82) * 0.9 : a < 50 ? -(50 - a) * 0.2 : 0;           // 後ろに反る（度）
+  const sh = [hip[0] - 88 * Math.sin(lean * deg) + 14, hip[1] - 88 * Math.cos(lean * deg)];
+  $('torso').setAttribute('x1', hip[0]); $('torso').setAttribute('y1', hip[1]);
+  $('torso').setAttribute('x2', sh[0]); $('torso').setAttribute('y2', sh[1]);
+  $('head').setAttribute('cx', sh[0] - 12 * Math.sin(lean * deg) + 4); $('head').setAttribute('cy', sh[1] - 26);
+  const knee = [hip[0] + 64 * Math.sin(a * deg), hip[1] + 64 * Math.cos(a * deg)];
+  const foot = [knee[0] - 8, Math.min(knee[1] + 58, 270)];
+  $('frontLeg').setAttribute('points', `${hip} ${knee} ${foot}`);
+  $('frontArm').setAttribute('points', `${sh} ${sh[0] - 30},${sh[1] + 40} ${sh[0] - 12},${sh[1] + 72}`);
+  $('backArm').setAttribute('points', `${sh} ${sh[0] + 34},${sh[1] + 30} ${sh[0] + 54},${sh[1] + 4}`);
+  const power = Math.max(24, 220 - Math.abs(a - 68) * 3.2 - Math.max(0, lean) * 4);
+  $('arrowLine').setAttribute('x2', 40 + power);
+  const x = 40 + power + 4;
+  $('arrowHead').setAttribute('d', `M${x} 40 l-14 -10 v20 z`);
+  const [v, n] = a > 88 ? ['上げすぎ', '体が後ろに反って、前に進まない'] : a < 48 ? ['低すぎ', '一歩が小さく、スピードに乗らない'] : ['ちょうどいい', '体がまっすぐ、力が前に向かう'];
+  $('verdict').textContent = v; $('verdictNote').textContent = n;
+}
+$('angle').addEventListener('input', e => draw(+e.target.value)); draw(+$('angle').value);
+
+// 活動日の参加
+document.querySelectorAll('.join').forEach(b => b.addEventListener('click', () => {
+  const on = b.getAttribute('aria-pressed') !== 'true';
+  b.setAttribute('aria-pressed', on); b.textContent = on ? '参加予定' : '参加する';
+}));
+
+// 料金タブ
+const tabs = [...document.querySelectorAll('[role=tab]')];
+tabs.forEach(t => t.addEventListener('click', () => {
+  tabs.forEach(x => { x.setAttribute('aria-selected', x === t); document.getElementById(x.getAttribute('aria-controls')).hidden = x !== t; });
+}));
+
+// 申し込み（試作）
+$('trial').addEventListener('submit', e => { e.preventDefault(); $('trialDone').style.display = 'block'; });
+$('book').addEventListener('click', e => { e.preventDefault(); alert('試作です。本番では Square の予約画面が開きます。'); });
+</script>
+</body>
+</html>
