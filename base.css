@@ -9,7 +9,7 @@
   --accent: #7fc8c2;
   --on-main: #ffffff;
 }
-body.bw    { --main: #c0633a; --accent: #e9b89c; } /* 今のサイトのテラコッタ */
+body.bw    { --main: #1f5fae; --accent: #8fb8e8; } /* 青 */
 body.heros { --main: #1d1d1f; --accent: #9aa0a6; } /* 今のサイトの黒と白 */
 body.jrera { --main: #e8700f; --accent: #f6b21a; } /* ロゴのオレンジと黄 */
 

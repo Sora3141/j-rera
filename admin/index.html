@@ -29,7 +29,7 @@
   .due { color: #c62828; font-weight: 700; }
   .na { color: #c3c9d0; }
   .pill { font-size: 11px; padding: 1px 8px; border-radius: 999px; color: #fff; }
-  .pill.bw { background: #c0633a; } .pill.heros { background: #1d1d1f; }
+  .pill.bw { background: #1f5fae; } .pill.heros { background: #1d1d1f; }
   .bars { display: grid; gap: 8px; }
   .bar { display: grid; grid-template-columns: 3.5em 1fr 6.5em; gap: 10px; align-items: center; font-size: 14px; }
   .bar .track { display: flex; height: 18px; border-radius: 6px; overflow: hidden; background: var(--soft); }
@@ -75,7 +75,7 @@
 
   <section class="panel" id="sales" hidden>
     <div class="bars" id="bars"></div>
-    <p class="legend"><i style="background:#c0633a"></i>BW陸上クラブ <i style="background:#1d1d1f"></i>HERO'S</p>
+    <p class="legend"><i style="background:#1f5fae"></i>BW陸上クラブ <i style="background:#1d1d1f"></i>HERO'S</p>
   </section>
 
   <section class="panel" id="lessons" hidden>
@@ -156,7 +156,7 @@ document.getElementById('remindAll').onclick = demo;
 const max = Math.max(...SALES.map(([, a, b]) => a + b));
 document.getElementById('bars').innerHTML = SALES.map(([m, a, b]) =>
   `<div class="bar"><span>${m}</span><span class="track">
-    <span style="width:${a / max * 100}%;background:#c0633a" title="BW ${yen(a)}"></span>
+    <span style="width:${a / max * 100}%;background:#1f5fae" title="BW ${yen(a)}"></span>
     <span style="width:${b / max * 100}%;background:#1d1d1f" title="HERO'S ${yen(b)}"></span>
   </span><span class="v">${yen(a + b)}</span></div>`).join('');
 
