@@ -123,6 +123,10 @@ details[open] summary { margin-bottom: 8px; }
 .video { aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: #000; }
 .video iframe { width: 100%; height: 100%; border: 0; display: block; }
 .caption { margin: 8px 0 0; font-size: 14px; color: var(--sub); }
+.split { display: grid; gap: 32px; grid-template-columns: 1fr 1.3fr; align-items: center; }
+.split .btns { margin-top: 0; }
+.movie { margin: 0; }
+@media (max-width: 760px) { .split { grid-template-columns: 1fr; gap: 20px; } }
 
 footer.family .sns { display: flex; gap: 16px; margin-bottom: 12px; }
 footer.family .sns a { color: #cfd6de; }
